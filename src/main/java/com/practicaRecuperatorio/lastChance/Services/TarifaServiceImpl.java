@@ -33,6 +33,11 @@ public class TarifaServiceImpl implements TarifaService{
         Tarifa tarifa= Optional.of(entity).map(tarifaMapper).get();
         tarifaRepository.save(tarifa);
     }
+    @Override
+    public void update(TarifaDto entity) {
+        Optional<Tarifa> optionalTarifa = Stream.of(entity).map(tarifaMapper).findFirst();
+        optionalTarifa.ifPresent(tarifaRepository::save);
+    }
 
     @Override
     public TarifaDto getById(Long id) {
@@ -40,15 +45,6 @@ public class TarifaServiceImpl implements TarifaService{
         //utiliza una expresión ternaria para realizar una comprobación de nulidad antes de mappear
         // Si tarifa no es nula, se aplica la función de mapeo tarifaDtoMapper
         return tarifa!= null? tarifaDtoMapper.apply(tarifa):null; // si tarifa es nula, devuelve null.
-    }
-
-    @Override
-    public List<TarifaDto> getAll() {
-        List<Tarifa>values=tarifaRepository.findAll();
-        //Convierte la colección values en un flujo (stream) de elementos.
-        //Luego aplica la función de mapeo tarifaDtoMapper a cada elemento del stream.
-        // y el toList(), recolecta los elementos del stream y los devuelve como una lista.
-        return values.stream().map(tarifaDtoMapper).toList();
     }
 
     @Override
@@ -63,8 +59,22 @@ public class TarifaServiceImpl implements TarifaService{
     }
 
     @Override
-    public void update(TarifaDto entity) {
-        Optional<Tarifa> optionalTarifa = Stream.of(entity).map(tarifaMapper).findFirst();
-        optionalTarifa.ifPresent(tarifaRepository::save);
+    public List<TarifaDto> getAll() {
+        List<Tarifa> values= tarifaRepository.findAll();
+        //Convierte la colección values en un flujo (stream) de elementos.
+        //Luego aplica la función de mapeo tarifaDtoMapper a cada elemento del stream.
+        // y el toList(), recolecta los elementos del stream y los devuelve como una lista.
+        return values.stream().map(tarifaDtoMapper).toList();
     }
+    @Override
+    public List<TarifaDto> findByTipoTarifa(long tipoTarifa) {
+        return tarifaRepository.findByTipoTarifa(tipoTarifa)
+                .stream()
+                .map(tarifaDtoMapper)
+                .toList();
+    }
+    //Realiza una búsqueda en la base de datos de todas las tarifas con un determinado tipoTarifa.
+    //Luego, utiliza un mapeo (tarifaDtoMapper) para convertir los resultados de las entidades Tarifa
+    // en objetos de transferencia de datos (TarifaDto).
+
 }

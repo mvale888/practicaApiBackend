@@ -8,7 +8,8 @@ import java.util.function.Function;
 
 @Service
 public class TarifaMapper implements Function<TarifaDto, Tarifa> {
-
+    //1° param. Lo que recibe a transformar, 2° param.La salida.
+    //Aquí estamos mappeando de un DTo a una entity.
     @Override
     public Tarifa apply(TarifaDto tarifaDto) {
         return new Tarifa(

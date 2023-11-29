@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.function.Function;
 @Service
 public class TarifaDtoMapper implements Function<Tarifa, TarifaDto> {
-
+                    //Recibe una Entity y la salida es un tipo Dto.
     @Override
     public TarifaDto apply(Tarifa tarifa) {
         return new TarifaDto(

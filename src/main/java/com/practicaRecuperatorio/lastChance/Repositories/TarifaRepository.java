@@ -8,5 +8,5 @@ import java.util.List;
 @Repository
 public interface TarifaRepository extends JpaRepository<Tarifa,Long> {
 
-    List<Tarifa>findAllByMes(Integer mes);
+    List<Tarifa>findByTipoTarifa(long tipoTarifa);
 }

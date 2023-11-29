@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(force = true)
 public class TarifaDto {
     private final Long id;
-    private final int tipoTarifa;
+    private final Long tipoTarifa;
     private final String definicion;
-    private final int diaSemana;
-    private final int diaMes;
-    private final int mes;
-    private final int anio;
-    private final float montoFijoAlquiler;
-    private final float montoMinutoFraccion;
-    private final float montoKm;
-    private final float montoHora;
+    private final Integer diaSemana;
+    private final Integer diaMes;
+    private final Integer mes;
+    private final Integer anio;
+    private final Float montoFijoAlquiler;
+    private final Float montoMinutoFraccion;
+    private final Float montoKm;
+    private final Float montoHora;
 }
